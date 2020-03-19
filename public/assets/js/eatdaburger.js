@@ -2,23 +2,20 @@
 $(function() {
   $(".change-type").on("click", function(event) {
     var id = $(this).data("id");
-    var newType = $(this).data("newType");
 
     var newEatenState = {
-      devoured: newType
+      devoured: 1
     };
 
     // Send the PUT request.
-    $.ajax("/api/burger/" + id, {
+    $.ajax("/api/burgers/" + id, {
       type: "PUT",
       data: newEatenState
-    }).then(
-      function() {
-        console.log("changed burger to", newType);
+    }).done(function() {
+        console.log("changed burger to 1");
         // Reload the page to get the updated list
         location.reload();
-      }
-    );
+    });
   });
 
   $(".create-form").on("submit", function(event) {
@@ -26,8 +23,7 @@ $(function() {
     event.preventDefault();
 
     var newBurger = {
-      name: $("#burger").val().trim(),
-      devoured: $("[name=devoured]:checked").val().trim()
+      name: $("#burger").val().trim()
     };
 
     // Send the POST request.
